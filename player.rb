@@ -1,4 +1,4 @@
-Class Player 
+class Player 
 attr_accessor :name, :lives
 
   def initialize(name)
@@ -13,5 +13,17 @@ attr_accessor :name, :lives
   def lost
     @lives == 0
   end
-  
+
+  def new_question
+    new_question = Question.new
+    new_question.ask_question(name)
+    print 
+    @choice = $stdin.gets.chomp
+    if new_question.answer(@choice.to_i)
+      puts "That is CORRECT!!"
+    else 
+      puts "Sorry that is INCORRECT!"
+      lose_life
+    end
+  end
 end
